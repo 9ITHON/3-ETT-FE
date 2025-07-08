@@ -17,9 +17,21 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name={SCREEN.Home} component={Home} />
-        <Stack.Screen name={SCREEN.TextInput} component={TextInput} />
-        <Stack.Screen name={SCREEN.PhotoCapture} component={PhotoCapture} />
+        <Stack.Screen
+          name={SCREEN.Home}
+          component={Home}
+          options={{ title: "홈" }}
+        />
+        <Stack.Screen
+          name={SCREEN.TextInput}
+          component={TextInput}
+          options={{ title: "문장 입력" }}
+        />
+        <Stack.Screen
+          name={SCREEN.PhotoCapture}
+          component={PhotoCapture}
+          options={{ title: "문서 사진 촬영" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
