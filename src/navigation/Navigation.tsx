@@ -1,10 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "@/screens/Home";
+import { SCREEN } from "@/constants/screen";
 
 export type RootStackParamList = {
-  Home: undefined;
+  [SCREEN.Home]: undefined;
+  [SCREEN.PhotoCapture]: undefined;
+  [SCREEN.TextInput]: undefined;
 };
+
 export type ScreenType = keyof RootStackParamList;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

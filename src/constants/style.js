@@ -1,4 +1,4 @@
-const colors = {
+const COLORS = {
   main: "#123456",
   main1: "#345678",
   main2: "#567890",
@@ -9,4 +9,4 @@ const colors = {
   white: "#ffffff",
 };
 
-module.exports = { colors };
+module.exports = { COLORS };
