@@ -1,34 +1,14 @@
-import { GestureDetector, Gesture } from "react-native-gesture-handler";
-import Animated, {
-  useSharedValue,
-  useAnimatedProps,
-} from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { CameraView } from "expo-camera";
-import useCamera from "../hooks/useCamera";
+import { GestureDetector } from "react-native-gesture-handler";
+import { useCamera, useZoom } from "../hooks";
 import { TouchableOpacity, View } from "react-native";
 
 const AnimatedCameraView = Animated.createAnimatedComponent(CameraView);
 
-const ZOOM_VALUE = {
-  min: 0,
-  max: 1,
-  speed: 0.02,
-} as const;
-
 const Capture = () => {
   const { cameraRef, takePhoto } = useCamera();
-  const zoom = useSharedValue<number>(ZOOM_VALUE.min);
-
-  const pinchGesture = Gesture.Pinch().onUpdate((event) => {
-    zoom.value = Math.min(
-      Math.max(0, zoom.value + (event.scale - 1) * ZOOM_VALUE.speed),
-      ZOOM_VALUE.max
-    );
-  });
-
-  const zoomAnimateProps = useAnimatedProps(() => ({
-    zoom: zoom.value,
-  }));
+  const { pinchGesture, zoomAnimateProps } = useZoom();
 
   return (
     <>
