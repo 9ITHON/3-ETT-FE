@@ -1,19 +1,9 @@
+import useCamera from "../hooks/useCamera";
 import { CameraView } from "expo-camera";
-import { useRef } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { useURIContext } from "../context/URIContext";
 
 const Capture = () => {
-  const cameraRef = useRef<CameraView>(null);
-
-  const { setPhotoURI } = useURIContext();
-
-  const takePhoto = async () => {
-    const photo = await cameraRef.current?.takePictureAsync();
-    if (photo?.uri) {
-      setPhotoURI(photo.uri);
-    }
-  };
+  const { cameraRef, takePhoto } = useCamera();
 
   return (
     <>
