@@ -5,7 +5,7 @@ import { Alert, Linking } from "react-native";
 const useCameraPermission = () => {
   const [permission, requestPermission] = useCameraPermissions();
 
-  const checkPermissions = async () => {
+  const checkPermission = async () => {
     if (!permission) return;
 
     if (permission.status !== "granted") {
@@ -31,7 +31,7 @@ const useCameraPermission = () => {
   };
 
   useEffect(() => {
-    checkPermissions();
+    checkPermission();
   }, [permission]);
 };
 
