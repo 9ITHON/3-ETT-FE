@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const Splash = () => {
-  return <View>Splash</View>;
+  return (
+    <View>
+      <Text>Splash</Text>
+    </View>
+  );
 };
 
 export default Splash;
