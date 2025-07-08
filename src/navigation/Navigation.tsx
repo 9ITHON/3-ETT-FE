@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "@/screens/Home";
 import { SCREEN } from "@/constants/screen";
+import { Home, PhotoCapture } from "@/screens";
 
 export type RootStackParamList = {
   [SCREEN.Home]: undefined;
@@ -17,7 +17,8 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name={SCREEN.Home} component={Home} />
+        <Stack.Screen name={SCREEN.PhotoCapture} component={PhotoCapture} />
       </Stack.Navigator>
     </NavigationContainer>
   );
