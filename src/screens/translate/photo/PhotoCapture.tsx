@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const PhotoCapture = () => {
-  return <View>PhotoCapture</View>;
+  return (
+    <View>
+      <Text>PhotoCapture</Text>
+    </View>
+  );
 };
 
 export default PhotoCapture;

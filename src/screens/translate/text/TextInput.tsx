@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const TextInput = () => {
-  return <View>TextInput</View>;
+  return (
+    <View>
+      <Text>TextInput</Text>
+    </View>
+  );
 };
 
 export default TextInput;
