@@ -1,27 +1,15 @@
-import Animated from "react-native-reanimated";
-import { CameraView } from "expo-camera";
-import { GestureDetector } from "react-native-gesture-handler";
-import { useCamera, useZoom } from "../hooks";
+import { useCamera } from "../hooks";
+import CameraViewer from "./CameraViewer";
 import { TouchableOpacity, View } from "react-native";
-
-const AnimatedCameraView = Animated.createAnimatedComponent(CameraView);
 
 const Capture = () => {
   const { cameraRef, takePhoto } = useCamera();
-  const { pinchGesture, zoomAnimateProps } = useZoom();
 
   return (
     <>
-      <GestureDetector gesture={pinchGesture}>
-        <AnimatedCameraView
-          ref={cameraRef}
-          className="flex-1"
-          facing="back"
-          animateShutter
-          animatedProps={zoomAnimateProps}
-        />
-      </GestureDetector>
+      <CameraViewer cameraRef={cameraRef} />
 
+      {/*  camera view under section */}
       <View className="flex-row items-center justify-around px-8 py-4 bg-white">
         <TouchableOpacity>
           <View className="w-8 h-8" />
