@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const Loading = () => {
-  return <View>Loading</View>;
+  return (
+    <View>
+      <Text>Loading</Text>
+    </View>
+  );
 };
 
 export default Loading;

@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const TranslateComplete = () => {
-  return <View>TranslateComplete</View>;
+  return (
+    <View>
+      <Text>TranslateComplete</Text>
+    </View>
+  );
 };
 
 export default TranslateComplete;

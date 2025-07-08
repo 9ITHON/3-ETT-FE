@@ -1,5 +1,10 @@
+import { URIProvider } from "@/features/capture/context/URIContext";
 import Navigation from "@/navigation/Navigation";
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <URIProvider>
+      <Navigation />
+    </URIProvider>
+  );
 }

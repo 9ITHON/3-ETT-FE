@@ -1,3 +1,5 @@
+import CapturePreview from "@/features/capture/components/CapturePreview";
+import { useURIContext } from "@/features/capture/context/URIContext";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Image } from "expo-image";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +10,7 @@ const PhotoCapture = () => {
   const [permission, requestPermission] = useCameraPermissions();
 
   const checkPermissions = async () => {
-    if (!permission) return; // 권한 정보가 없으면 리턴
+    if (!permission) return;
 
     if (permission.status !== "granted") {
       if (!permission.canAskAgain) {
@@ -27,7 +29,6 @@ const PhotoCapture = () => {
           { cancelable: false }
         );
       } else {
-        // 권한을 다시 요청할 수 있을 때
         requestPermission();
       }
     }
@@ -37,34 +38,21 @@ const PhotoCapture = () => {
     checkPermissions();
   }, [permission]);
 
-  // picture
-  const [photoUri, setPhotoUri] = useState<string | null>(null);
-
   // camera
   const cameraRef = useRef<CameraView>(null);
+  const { photoURI, setPhotoURI } = useURIContext();
 
   const takePhoto = async () => {
     const photo = await cameraRef.current?.takePictureAsync();
     if (photo?.uri) {
-      setPhotoUri(photo.uri);
+      setPhotoURI(photo.uri);
     }
   };
 
   return (
     <View className="flex-1">
-      {photoUri ? ( // TODO: seperate here
-        <View className="flex-1">
-          <Image source={{ uri: photoUri }} className="flex-1" />
-          <TouchableOpacity
-            className="px-4 py-2 rounded-lg border border-[#558BCF]"
-            onPress={() => setPhotoUri(null)}
-          >
-            <Text className="text-[#558BCF] font-semibold">다시 촬영</Text>
-          </TouchableOpacity>
-          <TouchableOpacity className="px-4 py-2 rounded-lg bg-[#558BCF]">
-            <Text className="font-semibold text-white">다음</Text>
-          </TouchableOpacity>
-        </View>
+      {photoURI ? ( // TODO: seperate here
+        <CapturePreview />
       ) : (
         <>
           <CameraView // FIXME: custom here
