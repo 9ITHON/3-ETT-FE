@@ -1,29 +1,21 @@
-import Animated from "react-native-reanimated";
-import { CameraView } from "expo-camera";
-import { GestureDetector } from "react-native-gesture-handler";
-import { useCamera, useZoom } from "../hooks";
+import { useCamera } from "../hooks";
+import usePickLibrary from "../hooks/usePickLibrary";
+import CameraViewer from "./CameraViewer";
 import { TouchableOpacity, View } from "react-native";
 
-const AnimatedCameraView = Animated.createAnimatedComponent(CameraView);
-
 const Capture = () => {
-  const { cameraRef, takePhoto } = useCamera();
-  const { pinchGesture, zoomAnimateProps } = useZoom();
-
+  const { cameraRef, takePhoto, flashMode, toggleFlash } = useCamera();
+  const pickPicture = usePickLibrary();
   return (
     <>
-      <GestureDetector gesture={pinchGesture}>
-        <AnimatedCameraView
-          ref={cameraRef}
-          className="flex-1"
-          facing="back"
-          animateShutter
-          animatedProps={zoomAnimateProps}
-        />
-      </GestureDetector>
+      <CameraViewer cameraRef={cameraRef} flashMode={flashMode} />
 
+      {/*  camera view under section */}
       <View className="flex-row items-center justify-around px-8 py-4 bg-white">
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={pickPicture}
+          className="items-center justify-center w-16 h-16 rounded-full shadow bg-slate-400"
+        >
           <View className="w-8 h-8" />
         </TouchableOpacity>
         <TouchableOpacity
@@ -32,7 +24,10 @@ const Capture = () => {
         >
           <View className="w-8 h-8" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={toggleFlash}
+          className="items-center justify-center w-16 h-16 rounded-full shadow bg-slate-400"
+        >
           <View className="w-8 h-8" />
         </TouchableOpacity>
       </View>

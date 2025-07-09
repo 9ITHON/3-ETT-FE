@@ -1,6 +1,6 @@
+import { useURIContext } from "../context/URIContext";
 import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useURIContext } from "../context/URIContext";
 
 const CapturePreview = () => {
   const { photoURI, setPhotoURI } = useURIContext();

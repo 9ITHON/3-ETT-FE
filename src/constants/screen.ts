@@ -4,4 +4,5 @@ export const SCREEN = {
   PhotoPreview: "PhotoPreview",
   TextInput: "TextInput",
   TranslateComplete: "TranslateComplete",
+  Loading: "Loading",
 } as const;

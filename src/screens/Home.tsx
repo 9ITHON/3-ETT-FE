@@ -22,6 +22,10 @@ const Home = ({ navigation }: Props) => {
         title="문서 촬영하기"
         onPress={() => navigation.navigate(SCREEN.PhotoCapture)}
       />
+      <Button
+        title="임시 로딩"
+        onPress={() => navigation.navigate(SCREEN.Loading)}
+      />
     </View>
   );
 };
