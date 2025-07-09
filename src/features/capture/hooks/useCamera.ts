@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { CameraView } from "expo-camera";
 import { useURIContext } from "../context";
 
-export type FlashType = "off" | "on";
+export type FlashType = "off" | "on"; // "off" is default value.
 
 const useCamera = () => {
   // camera ref

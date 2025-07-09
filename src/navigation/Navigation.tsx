@@ -1,12 +1,13 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
-import { Home, PhotoCapture, TextInput } from "@/screens";
+import { Home, Loading, PhotoCapture, TextInput } from "@/screens";
 
 export type RootStackParamList = {
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
   [SCREEN.TextInput]: undefined;
+  [SCREEN.Loading]: undefined;
 };
 
 export type ScreenType = keyof RootStackParamList;
@@ -31,6 +32,11 @@ const Navigation = () => {
           name={SCREEN.PhotoCapture}
           component={PhotoCapture}
           options={{ title: "문서 사진 촬영" }}
+        />
+        <Stack.Screen
+          name={"Loading"}
+          component={Loading}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
