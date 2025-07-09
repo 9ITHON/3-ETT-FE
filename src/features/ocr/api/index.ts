@@ -1,6 +1,6 @@
 import { OCR_URL, X_OCR_SECRET } from "@env";
 import axios from "axios";
-import uuid from "react-native-uuid";
+import { generateUUID } from "../utils/generateUUID";
 
 export const requestOCR = async (photoURI: string) => {
   const formData = new FormData();
@@ -9,7 +9,7 @@ export const requestOCR = async (photoURI: string) => {
     "message",
     JSON.stringify({
       version: "V2",
-      requestId: "uuid-1234",
+      requestId: generateUUID(),
       timestamp: Date.now(),
       lang: "ko",
       images: [
