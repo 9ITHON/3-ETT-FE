@@ -12,13 +12,13 @@ const checkLibraryPremission = async () => {
   return granted;
 };
 
-const usePickLibrary = async () => {
-  const libraryGranted = await checkLibraryPremission();
-  if (!libraryGranted) return;
-
+const usePickLibrary = () => {
   const { setPhotoURI } = useURIContext();
 
   const pickPicture = async () => {
+    const libraryGranted = await checkLibraryPremission();
+    if (!libraryGranted) return;
+
     const pickedPicture = await ImagePicker.launchImageLibraryAsync({
       selectionLimit: 1,
       mediaTypes: "images",
