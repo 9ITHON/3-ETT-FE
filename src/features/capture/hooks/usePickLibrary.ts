@@ -26,6 +26,7 @@ const usePickLibrary = () => {
 
     if (!pickedPicture.canceled) {
       const uri = pickedPicture.assets[0].uri;
+      console.log(pickedPicture.assets[0]); // assetId, fileSize (3254282), mimeType (image/jpeg), uri (***.jpg)
       setPhotoURI(uri);
     }
   };
