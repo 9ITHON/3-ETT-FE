@@ -1,9 +1,8 @@
 import axios from "axios";
-import { OCR_URL, X_OCR_SECRET } from "@env";
 import { generateUUID } from "../utils/generateUUID";
+import { OCR_URL, X_OCR_SECRET } from "@env";
 
-// TODO: refactor this page !!
-
+// type
 type formatType = "jpg" | "png"; // append here
 
 interface PhotoInfo {
@@ -11,10 +10,19 @@ interface PhotoInfo {
   format: formatType;
 }
 
-type OcrText = { texts: string[] };
+type OCRText = { texts: string[] };
 
-export const requestOCR = async (photoInfo: PhotoInfo): Promise<OcrText> => {
+// constants
+const OCR_MESSAGE = {
+  version: "V1",
+  lang: "ko",
+} as const;
+const API_TIMEOUT = 15000 as const;
+
+// reauest api
+export const requestOCR = async (photoInfo: PhotoInfo): Promise<OCRText> => {
   const { uri, format } = photoInfo;
+
   const formData = new FormData();
 
   let uuid = generateUUID();
@@ -24,10 +32,10 @@ export const requestOCR = async (photoInfo: PhotoInfo): Promise<OcrText> => {
   formData.append(
     "message",
     JSON.stringify({
-      version: "V1",
+      version: OCR_MESSAGE.version,
       requestId: uuid as string,
       timestamp: time,
-      lang: "ko",
+      lang: OCR_MESSAGE.lang,
       images: [
         {
           format: `${format}`,
@@ -43,15 +51,14 @@ export const requestOCR = async (photoInfo: PhotoInfo): Promise<OcrText> => {
     name: `photo-${time}.${format}`,
   } as any);
 
-  // response
+  // post
   try {
-    // post
     const { data, status } = await axios.post(OCR_URL, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         "X-OCR-SECRET": X_OCR_SECRET,
       },
-      timeout: 15000, // FIXME: magic number
+      timeout: API_TIMEOUT,
     });
     if (status !== 200) throw new Error(`HTTP_${status}`); // TODO: status code management
 
@@ -65,8 +72,10 @@ export const requestOCR = async (photoInfo: PhotoInfo): Promise<OcrText> => {
     // error
     if (axios.isAxiosError(err)) {
       console.log("❌err.response?.data", err.response?.data);
+
       if (!err.response) throw new Error("NETWORK_ERROR");
       if (err.code === "ECONNABORTED") throw new Error("TIMEOUT");
+
       throw new Error(`HTTP_${err.response.status}`);
     }
     throw err;

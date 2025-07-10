@@ -11,22 +11,24 @@ const useCamera = () => {
 
   // capture
   const { setPhotoURI } = useURIContext();
-  const takePhoto = async () => {
+  const capture = async () => {
     const photo = await cameraRef.current?.takePictureAsync();
     if (photo?.uri) {
       console.log(photo);
       //
       //____API TEST SECTION ____//
 
-      const { texts } = await requestOCR({
-        uri: photo?.uri,
-        format: photo?.format,
-      });
-      const newText = texts.join(", ");
-      console.log(newText);
+      // const { texts } = await requestOCR({
+      //   uri: photo?.uri,
+      //   format: photo?.format,
+      // });
+      // const newText = texts.join(", ");
+      // console.log(newText);
 
       //____API TEST SECTION ____//
       //
+      console.log(photo.uri.split(".")[1]);
+
       setPhotoURI(photo.uri); // height, width, format(png, jpg), uri
     }
   };
@@ -37,7 +39,7 @@ const useCamera = () => {
     setFlashMode((prev) => (prev === "off" ? "on" : "off"));
   };
 
-  return { cameraRef, takePhoto, flashMode, toggleFlash };
+  return { cameraRef, capture, flashMode, toggleFlash };
 };
 
 export default useCamera;
