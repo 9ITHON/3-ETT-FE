@@ -1,5 +1,5 @@
+import { useURIContext } from "@/features/capture";
 import getOcrTexts from "@/features/ocr/utils/getOcrTexts";
-import { useURIContext } from "../context/URIContext";
 import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
 
