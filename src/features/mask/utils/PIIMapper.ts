@@ -1,7 +1,8 @@
+import { PIIMapType } from "../types";
 import { PIIType } from "../constants/PIIRegExp";
 
 export class PIIMapper {
-  private PIIMap = new Map<string, string>();
+  private PIIMap: PIIMapType = new Map();
   private PIICounterMap = new Map<PIIType, number>();
 
   isMapped(PII: string): boolean {
