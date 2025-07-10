@@ -8,7 +8,7 @@ const getOcrTexts = async (uri: string) => {
       uri: uri,
       format: format,
     });
-
+    console.log("ocr된 텍스트", texts);
     const ocrTexts = texts.join(" ");
     return ocrTexts;
   } catch {

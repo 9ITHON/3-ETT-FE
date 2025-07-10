@@ -1,9 +1,25 @@
+import getOcrTexts from "@/features/ocr/utils/getOcrTexts";
 import { useURIContext } from "../context/URIContext";
 import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
 
 const CapturePreview = () => {
   const { photoURI, setPhotoURI } = useURIContext();
+
+  const translate = async () => {
+    // ocr text (hard text)
+    if (!photoURI) return; // guard
+    const ocrText = await getOcrTexts(photoURI);
+    console.log("⭐", ocrText);
+
+    // mask on
+
+    // server, easy text
+
+    // mask off
+
+    // return easy text
+  };
 
   return (
     <View className="flex-1">
@@ -14,7 +30,10 @@ const CapturePreview = () => {
       >
         <Text className="text-[#558BCF] font-semibold">다시 촬영</Text>
       </TouchableOpacity>
-      <TouchableOpacity className="px-4 py-2 rounded-lg bg-[#558BCF]">
+      <TouchableOpacity
+        className="px-4 py-2 rounded-lg bg-[#558BCF]"
+        onPress={translate}
+      >
         <Text className="font-semibold text-white">다음</Text>
       </TouchableOpacity>
     </View>
