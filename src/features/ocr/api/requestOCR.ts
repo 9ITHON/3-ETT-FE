@@ -1,9 +1,7 @@
 import axios from "axios";
 import { generateUUID } from "../utils/generateUUID";
 import { OCR_URL, X_OCR_SECRET } from "@env";
-
-// type
-type formatType = "jpg" | "png"; // append here
+import { formatType } from "@/features/capture/type";
 
 interface PhotoInfo {
   uri: string;

@@ -1,8 +1,6 @@
 import { useRef, useState } from "react";
 import { CameraView } from "expo-camera";
 import { useURIContext } from "../context";
-import { requestOCR } from "@/features/ocr/api/requestOCR";
-import getExtensionFromURI from "../utils/getExtensionFromURI";
 
 export type FlashType = "off" | "on"; // "off" is default value.
 
@@ -15,7 +13,7 @@ const useCamera = () => {
   const capture = async () => {
     const photo = await cameraRef.current?.takePictureAsync();
     if (photo?.uri) {
-      setPhotoURI(photo.uri); // height, width, format(png, jpg), uri
+      setPhotoURI(photo.uri);
     }
   };
 
