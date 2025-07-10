@@ -8,7 +8,7 @@ interface MaskResult {
 const mask = (text: string): MaskResult => {
   const mapper = new PIIMapper();
   let maskedText = text;
-  console.log("*************************");
+
   for (const type of Object.keys(PIIRegExp) as PIIType[]) {
     const _PIIRegExp = PIIRegExp[type];
 

@@ -11,6 +11,7 @@ const getOcrTexts = async (uri: string) => {
 
     const ocrTexts = texts.join(" ");
     console.log("💠ocrText 입니다.\n", ocrTexts);
+
     return ocrTexts;
   } catch {
     throw new Error("OCR 변환이 실패했습니다.");
