@@ -1,4 +1,5 @@
 import { useURIContext } from "@/features/capture";
+import { mask } from "@/features/mask/utils";
 import getOcrTexts from "@/features/ocr/utils/getOcrTexts";
 import { Image } from "expo-image";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -10,10 +11,9 @@ const CapturePreview = () => {
     // ocr text (hard text)
     if (!photoURI) return; // guard
     const ocrText = await getOcrTexts(photoURI);
-    console.log("⭐", ocrText);
 
     // mask on
-
+    mask(ocrText);
     // server, easy text
 
     // mask off
