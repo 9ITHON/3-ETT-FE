@@ -10,7 +10,6 @@ const getOcrTexts = async (uri: string) => {
     });
 
     const ocrTexts = texts.join(" ");
-    console.log("💠ocrText 입니다.\n", ocrTexts);
 
     return ocrTexts;
   } catch {
