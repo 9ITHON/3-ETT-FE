@@ -10,7 +10,7 @@ const useCamera = () => {
 
   // capture
   const { setPhotoURI } = useURIContext();
-  const takePhoto = async () => {
+  const capture = async () => {
     const photo = await cameraRef.current?.takePictureAsync();
     if (photo?.uri) {
       setPhotoURI(photo.uri);
@@ -23,7 +23,7 @@ const useCamera = () => {
     setFlashMode((prev) => (prev === "off" ? "on" : "off"));
   };
 
-  return { cameraRef, takePhoto, flashMode, toggleFlash };
+  return { cameraRef, capture, flashMode, toggleFlash };
 };
 
 export default useCamera;
