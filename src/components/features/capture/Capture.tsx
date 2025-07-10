@@ -1,5 +1,4 @@
-import { useCamera } from "../hooks";
-import usePickLibrary from "../hooks/usePickLibrary";
+import { useCamera, usePickLibrary } from "@/features/capture";
 import CameraViewer from "./CameraViewer";
 import { TouchableOpacity, View } from "react-native";
 

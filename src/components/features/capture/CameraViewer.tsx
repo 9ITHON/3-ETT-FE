@@ -1,9 +1,9 @@
 import { CameraView } from "expo-camera";
 import { RefObject } from "react";
-import { FlashType } from "../hooks/useCamera";
 import Animated from "react-native-reanimated";
-import { useZoom } from "../hooks";
 import { GestureDetector } from "react-native-gesture-handler";
+import { FlashType } from "@/features/capture/hooks/useCamera";
+import { useZoom } from "@/features/capture";
 
 type Props = {
   cameraRef: RefObject<CameraView | null>;

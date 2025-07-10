@@ -1,7 +1,7 @@
 import useCameraPermission from "@/features/capture/hooks/useCameraPermission";
 import { useURIContext } from "@/features/capture/context/URIContext";
 import { View } from "react-native";
-import { Capture, CapturePreview } from "@/features/capture";
+import { CapturePreview, Capture } from "@/components";
 
 const PhotoCapture = () => {
   useCameraPermission();

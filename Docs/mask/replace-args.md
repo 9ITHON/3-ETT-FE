@@ -1,0 +1,1 @@
+[이곳에서 replace의 args들을 확인할 수 있습니다.](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/replace#:~:text=%ED%95%A8%EC%88%98%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%EB%8A%94%20%EC%95%84%EB%9E%98%EC%99%80,12345%20%2D%20%23%24*%25%27%EB%A1%9C%20%EC%84%A4%EC%A0%95%ED%95%A9%EB%8B%88%EB%8B%A4.)
