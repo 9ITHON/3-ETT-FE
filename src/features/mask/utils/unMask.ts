@@ -5,23 +5,40 @@ interface Props {
   PIIMap: PIIMapType;
 }
 
-export const unmask = ({ maskedText, PIIMap }: Props): string => {
-  const ReversedPIIMap: PIIMapType = new Map(
-    [...PIIMap.entries()].map(([raw, masked]) => [masked, raw])
-  );
+const getReversedMap = (map: PIIMapType): PIIMapType => {
+  return new Map([...map.entries()].map(([raw, masked]) => [masked, raw]));
+};
 
-  const pattern = Array.from(ReversedPIIMap.keys())
+const isValidMap = (map?: Map<any, any>): boolean => {
+  return map instanceof Map && map.size > 0;
+};
+
+const createUnmaskRegex = (maskedKeys: string[]): RegExp => {
+  const escapedPattern = maskedKeys
     .map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")) // 특수문자 escape
     .join("|");
 
-  if (!pattern) return maskedText;
-
-  const regex = new RegExp(pattern, "g");
-
-  return maskedText.replace(
-    regex,
-    (token) => ReversedPIIMap.get(token) || token
-  );
+  return new RegExp(escapedPattern, "g");
 };
 
-export default unmask;
+const applyUnmasking = (
+  maskedText: string,
+  reversedMap: PIIMapType,
+  regex: RegExp
+) => {
+  return maskedText.replace(regex, (token) => reversedMap.get(token) || token);
+};
+
+export const unMask = ({ maskedText, PIIMap }: Props): string => {
+  const reversedMap = getReversedMap(PIIMap);
+
+  if (!isValidMap(reversedMap)) return maskedText;
+
+  const regex = createUnmaskRegex(Array.from(reversedMap.keys()));
+
+  const unMaskedText = applyUnmasking(maskedText, reversedMap, regex);
+
+  return unMaskedText;
+};
+
+export default unMask;
