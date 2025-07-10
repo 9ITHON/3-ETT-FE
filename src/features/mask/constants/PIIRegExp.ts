@@ -1,4 +1,4 @@
-// NOTE: pii (personally identifiable information) : 개인 식별 정보, 즉 개인 정보를 의미합니다.
+// NOTE: PII (personally identifiable information) : 개인 식별 정보, 즉 개인 정보를 의미합니다.
 export type PIIType =
   | "이름"
   | "주민등록번호"
@@ -11,7 +11,7 @@ export type PIIType =
   | "주소";
 
 export const PIIRegExp: Record<PIIType, RegExp> = {
-  이름: /(성명|이름)\s*[:：]?\s*([가-힣]{2,4})/g,
+  이름: /(성명|이름)\s*[:：]?\s*([가-힣]{2,4})/g, // 이름은 이름과 성명이라는 단어가 앞에 붙어야 인식합니다.
   주민등록번호: /\b\d{6}-\d{7}\b/g,
   운전면허번호: /\b\d{2}-\d{2}-\d{6}-\d{2}\b/g,
   건강보험증번호: /\b\d{11}\b/g,

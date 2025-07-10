@@ -13,7 +13,19 @@ const CapturePreview = () => {
     const ocrText = await getOcrTexts(photoURI);
 
     // mask on
-    mask(ocrText);
+    const { maskedText, PIIMap } = mask(ocrText);
+
+    //______ mask test section ______
+    console.log("🔒 마스킹된 텍스트:");
+    console.log(maskedText);
+
+    console.log("\n📌 매핑 정보:");
+    for (const [original, masked] of PIIMap.entries()) {
+      console.log(`${original} → ${masked}`);
+    }
+    console.log("________________");
+    //______ mask test section ______
+
     // server, easy text
 
     // mask off

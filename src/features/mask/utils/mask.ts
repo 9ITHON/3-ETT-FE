@@ -1,15 +1,30 @@
-import { PIIType } from "../constants/PIIRegExp";
+import { PIIMapper } from "./PIIMapper";
+import { PIIRegExp, PIIType } from "../constants/PIIRegExp";
 
-export const DummyValues: Record<PIIType, string> = {
-  이름: "김철수",
-  주민등록번호: "900101-1234567",
-  운전면허번호: "12-34-567890-12",
-  건강보험증번호: "12345678901",
-  사업자등록번호: "123-45-67890",
-  법인등록번호: "000000-0000000",
-  전화번호: "010-1234-5678",
-  이메일: "example@example.com",
-  주소: "서울특별시 중구 세종대로 110",
+interface MaskResult {
+  maskedText: string;
+  PIIMap: Map<string, string>;
+}
+const mask = (text: string): MaskResult => {
+  const mapper = new PIIMapper();
+  let maskedText = text;
+  console.log("*************************");
+  for (const type of Object.keys(PIIRegExp) as PIIType[]) {
+    const _PIIRegExp = PIIRegExp[type];
+
+    maskedText = maskedText.replace(_PIIRegExp, (...args) => {
+      const fullPIIText = args[0];
+      const PIIGroups = args.slice(1, -2); // -2: match start index
+      const PII = type === "이름" && PIIGroups[1] ? PIIGroups[1] : fullPIIText;
+      const maskedPII = mapper.getMaskedPII(type, PII);
+
+      return fullPIIText.replace(PII, maskedPII);
+    });
+  }
+
+  const PIIMap = mapper.getPIIMap();
+
+  return { maskedText, PIIMap };
 };
-const maskPII = (text: string) => {};
-export default maskPII;
+
+export default mask;
