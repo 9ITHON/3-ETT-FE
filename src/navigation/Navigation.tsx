@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
-import { Home, PhotoCapture, TextInput } from "@/screens";
+import { Home, Splash, PhotoCapture, TextInput, Login } from "@/screens";
 
 export type RootStackParamList = {
+  [SCREEN.Splash]: undefined;
+  [SCREEN.Login]: undefined;
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
   [SCREEN.TextInput]: undefined;
@@ -16,11 +18,17 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName={SCREEN.Splash} screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={SCREEN.Splash} component={Splash} />
         <Stack.Screen
           name={SCREEN.Home}
           component={Home}
           options={{ title: "홈" }}
+        />
+        <Stack.Screen
+          name={SCREEN.Login}
+          component={Login}
+          options={{ title: "로그인" }}
         />
         <Stack.Screen
           name={SCREEN.TextInput}
