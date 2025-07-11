@@ -7,9 +7,10 @@ interface ConfirmModalProps {
   title: string;
   onCancel: () => void;
   onConfirm: () => void;
+  children?: React.ReactNode;
 }
 
-const ConfirmModal = ({ visible, title, onCancel, onConfirm }: ConfirmModalProps) => {
+const ConfirmModal = ({ visible, title, onCancel, onConfirm, children }: ConfirmModalProps) => {
   return (
     <Modal transparent animationType="fade" visible={visible}>
       <View className="flex-1 justify-center items-center bg-black/75">
@@ -22,6 +23,9 @@ const ConfirmModal = ({ visible, title, onCancel, onConfirm }: ConfirmModalProps
           <Text className="font-[NanumSquareRoundOTFB] font-extrabold text-[24px] leading-[36px] text-center text-[#333333] mb-5">
             {title}
           </Text>
+          
+          {/* children이 전달되면 표시 */}
+          {children}
 
           {/* 버튼 그룹 */}
           <View className="flex-row justify-between">
@@ -29,7 +33,7 @@ const ConfirmModal = ({ visible, title, onCancel, onConfirm }: ConfirmModalProps
               onPress={onCancel}
               className="flex-1 bg-[#F4F5F7] border border-[#D3D8E1] rounded-lg py-3.5 mr-4 justify-center items-center"
             >
-              <Text className="font-[NanumSquareRoundOTF] font-bold text-[20px] leading-[28px] text-[#333333]">
+              <Text className="font-[NanumSquareRoundOTFB] font-bold text-[20px] leading-[28px] text-[#333333]">
                 아니요
               </Text>
             </Pressable>
@@ -38,7 +42,7 @@ const ConfirmModal = ({ visible, title, onCancel, onConfirm }: ConfirmModalProps
               onPress={onConfirm}
               className="flex-1 bg-[#558BCF] rounded-lg py-2 justify-center items-center"
             >
-              <Text className="font-[NanumSquareRoundOTF] font-bold text-[20px] leading-[28px] text-white">
+              <Text className="font-[NanumSquareRoundOTFB] font-bold text-[20px] leading-[28px] text-white">
                 예
               </Text>
             </Pressable>
