@@ -67,11 +67,11 @@ const LoginCarousel = ({ carouselRef, setActiveIndex }: Props) => {
               style={
                 index === 1
                   ? {
-                      width: 331,
-                      height: 328,
+                      width: 375,
+                      height: 365,
                       marginLeft: 0,
                       position: "absolute",
-                      bottom: -3,
+                      bottom: 0,
                       left: 0,
                     }
                   : {}
