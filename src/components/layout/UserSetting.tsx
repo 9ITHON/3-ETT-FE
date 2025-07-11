@@ -46,7 +46,7 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
       </View>
 
       {isLoggedIn ? (
-        // ✅ 로그인된 경우
+        // 로그인된 경우
         <View className="mt-4">
           <View className="flex-row items-center mb-6 px-6">
             <Image
