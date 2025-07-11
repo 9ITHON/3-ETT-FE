@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
-import { Home, Loading, Splash, PhotoCapture, TextInput, Login } from "@/screens";
+import { Home, Loading, Splash, PhotoCapture, TextInput, Login, Archive, ArchiveDetail } from "@/screens";
 
 export type RootStackParamList = {
   [SCREEN.Splash]: undefined;
@@ -10,6 +10,8 @@ export type RootStackParamList = {
   [SCREEN.PhotoCapture]: undefined;
   [SCREEN.TextInput]: undefined;
   [SCREEN.Loading]: undefined;
+  [SCREEN.Archive]: undefined;
+  ArchiveDetail: { date: string; content: string; title: string };
 };
 
 export type ScreenType = keyof RootStackParamList;
@@ -45,6 +47,16 @@ const Navigation = () => {
           name={"Loading"}
           component={Loading}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name={SCREEN.Archive} 
+          component={Archive} 
+          options={{ title: "아카이브" }}
+        />
+        <Stack.Screen
+          name={SCREEN.ArchiveDetail}
+          component={ArchiveDetail}
+          options={{ title: "기록 상세" }}
         />
       </Stack.Navigator>
     </NavigationContainer>
