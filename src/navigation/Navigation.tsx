@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
-import { Home, Loading, PhotoCapture, TextInput } from "@/screens";
+import { Home, Loading, PhotoCapture, TextInputViewer } from "@/screens";
 
 export type RootStackParamList = {
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
-  [SCREEN.TextInput]: undefined;
+  [SCREEN.TextInputViewer]: undefined;
   [SCREEN.Loading]: undefined;
 };
 
@@ -24,8 +24,8 @@ const Navigation = () => {
           options={{ title: "홈" }}
         />
         <Stack.Screen
-          name={SCREEN.TextInput}
-          component={TextInput}
+          name={SCREEN.TextInputViewer}
+          component={TextInputViewer}
           options={{ title: "문장 입력" }}
         />
         <Stack.Screen
