@@ -1,4 +1,6 @@
 export const SCREEN = {
+  Splash: "Splash",
+  Login: "Login",
   Home: "Home",
   PhotoCapture: "PhotoCapture",
   PhotoPreview: "PhotoPreview",
