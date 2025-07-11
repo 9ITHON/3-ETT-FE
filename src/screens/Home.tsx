@@ -16,7 +16,7 @@ const Home = ({ navigation }: Props) => {
       <Text className="text-lg font-bold text-main1">Home</Text>
       <Button
         title="문장 입력하기"
-        onPress={() => navigation.navigate(SCREEN.TextInput)}
+        onPress={() => navigation.navigate(SCREEN.TextInputViewer)}
       />
       <Button
         title="문서 촬영하기"
