@@ -2,7 +2,7 @@ import { mask, unMask } from "@/features/mask/utils";
 import { TranslatePayload } from "../types";
 import { getOcrTexts } from "@/features/ocr/utils";
 
-const translate = async (paylaod: TranslatePayload) => {
+const extractTextByType = async (paylaod: TranslatePayload) => {
   let originText = "";
 
   if (paylaod.type === "picture") {
@@ -13,6 +13,12 @@ const translate = async (paylaod: TranslatePayload) => {
   if (paylaod.type === "text") {
     originText = paylaod.text;
   }
+
+  return originText;
+};
+
+const translate = async (paylaod: TranslatePayload) => {
+  const originText = await extractTextByType(paylaod);
 
   // mask on
   const { maskedText, PIIMap } = mask(originText);
