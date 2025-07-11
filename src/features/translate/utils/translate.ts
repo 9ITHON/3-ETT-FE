@@ -26,7 +26,7 @@ const translate = async (paylaod: TranslatePayload) => {
   // get easy text from server
 
   // mask off
-  const unMaskedText = unMask({ maskedText, PIIMap }); // TODO: maskedText: 서버에서 받아온 이해하기 쉬운 말로 변경
+  const unMaskedText = unMask({ maskedText, PIIMap });
   console.log(unMaskedText);
   // return easy text
 };
