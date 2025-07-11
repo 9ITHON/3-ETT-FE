@@ -2,12 +2,15 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
 import { Home, Loading, PhotoCapture, TextInputViewer } from "@/screens";
+import { TranslatePayload } from "@/features/translate/types";
+import TranslateViewer from "@/screens/translate/complete/TranslateViewer";
 
 export type RootStackParamList = {
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
   [SCREEN.TextInputViewer]: undefined;
   [SCREEN.Loading]: undefined;
+  [SCREEN.TranslateViewer]: { payload: TranslatePayload };
 };
 
 export type ScreenType = keyof RootStackParamList;
@@ -32,6 +35,11 @@ const Navigation = () => {
           name={SCREEN.PhotoCapture}
           component={PhotoCapture}
           options={{ title: "문서 사진 촬영" }}
+        />
+        <Stack.Screen
+          name={SCREEN.TranslateViewer}
+          component={TranslateViewer}
+          options={{ title: "번역 결과" }}
         />
         <Stack.Screen
           name={"Loading"}

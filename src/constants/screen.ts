@@ -3,6 +3,6 @@ export const SCREEN = {
   PhotoCapture: "PhotoCapture",
   PhotoPreview: "PhotoPreview",
   TextInputViewer: "TextInputViewer",
-  TranslateComplete: "TranslateComplete",
+  TranslateViewer: "TranslateViewer",
   Loading: "Loading",
 } as const;

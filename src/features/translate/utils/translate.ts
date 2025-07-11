@@ -1,21 +1,6 @@
 import { mask, unMask } from "@/features/mask/utils";
 import { TranslatePayload } from "../types";
-import { getOcrTexts } from "@/features/ocr/utils";
-
-const extractTextByType = async (paylaod: TranslatePayload) => {
-  let originText = "";
-
-  if (paylaod.type === "picture") {
-    const ocrText = await getOcrTexts(paylaod.uri);
-    originText = ocrText;
-  }
-
-  if (paylaod.type === "text") {
-    originText = paylaod.text;
-  }
-
-  return originText;
-};
+import extractTextByType from "./extractTextByType";
 
 const translate = async (paylaod: TranslatePayload) => {
   const originText = await extractTextByType(paylaod);
@@ -26,8 +11,10 @@ const translate = async (paylaod: TranslatePayload) => {
   // get easy text from server
 
   // mask off
-  const unMaskedText = unMask({ maskedText, PIIMap }); // TODO: maskedText: 서버에서 받아온 이해하기 쉬운 말로 변경
-  console.log(unMaskedText);
-  // return easy text
+  const unMaskedText = unMask({ maskedText, PIIMap });
+
+  const easyText = unMaskedText;
+
+  return easyText;
 };
 export default translate;
