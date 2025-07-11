@@ -2,12 +2,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
 import { Home, Loading, PhotoCapture, TextInputViewer } from "@/screens";
+import { TranslatePayload } from "@/features/translate/types";
 
 export type RootStackParamList = {
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
   [SCREEN.TextInputViewer]: undefined;
   [SCREEN.Loading]: undefined;
+  [SCREEN.TranslateViewer]: { payload: TranslatePayload };
 };
 
 export type ScreenType = keyof RootStackParamList;

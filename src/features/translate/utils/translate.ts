@@ -1,21 +1,6 @@
 import { mask, unMask } from "@/features/mask/utils";
 import { TranslatePayload } from "../types";
-import { getOcrTexts } from "@/features/ocr/utils";
-
-const extractTextByType = async (paylaod: TranslatePayload) => {
-  let originText = "";
-
-  if (paylaod.type === "picture") {
-    const ocrText = await getOcrTexts(paylaod.uri);
-    originText = ocrText;
-  }
-
-  if (paylaod.type === "text") {
-    originText = paylaod.text;
-  }
-
-  return originText;
-};
+import extractTextByType from "./extractTextByType";
 
 const translate = async (paylaod: TranslatePayload) => {
   const originText = await extractTextByType(paylaod);
@@ -27,7 +12,9 @@ const translate = async (paylaod: TranslatePayload) => {
 
   // mask off
   const unMaskedText = unMask({ maskedText, PIIMap });
-  console.log(unMaskedText);
-  // return easy text
+
+  const easyText = unMaskedText;
+
+  return easyText;
 };
 export default translate;
