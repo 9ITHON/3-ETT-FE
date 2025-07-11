@@ -1,7 +1,6 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "@/navigation/Navigation";
 import { SCREEN } from "@/constants/screen";
-import { translate } from "@/features/translate";
 import { JSX, useCallback, useEffect, useState } from "react";
 import {
   TranslateError,
@@ -21,7 +20,7 @@ const TranslateViewer = () => {
 
   // 번역 상태
   const [translateStatus, setTranslateStatus] =
-    useState<TranslateStatus>("loading");
+    useState<TranslateStatus>("error");
 
   // 번역 결과물
   const [easyText, setEasyText] = useState<string | null>(null);
@@ -29,8 +28,9 @@ const TranslateViewer = () => {
   const runTranslate = useCallback(async () => {
     setTranslateStatus("loading");
     try {
-      const easyText = await translate(payload);
+      // const easyText = await translate(payload);
       setEasyText(easyText);
+      // throw new Error(); // error를 위한 throw입니다.
       setTranslateStatus("success");
     } catch (e) {
       setTranslateStatus("error");

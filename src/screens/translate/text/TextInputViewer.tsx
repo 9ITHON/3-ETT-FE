@@ -1,7 +1,8 @@
-import { translate } from "@/features/translate";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/navigation/Navigation";
 import useInputText from "@/hooks/useInputText";
 import { useKeyboardDrivenInput } from "@/hooks/useKeyboardDrivenInput";
-import React from "react";
+import { SCREEN } from "@/constants/screen";
 import {
   View,
   Text,
@@ -13,6 +14,13 @@ import {
   TouchableWithoutFeedback,
   Animated,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+// type
+type Navigation = NativeStackNavigationProp<
+  RootStackParamList,
+  typeof SCREEN.TranslateViewer
+>;
 
 // constants
 const LAYOUT = {
@@ -36,6 +44,9 @@ const TextInputViewer = () => {
     LAYOUT.button.initTranslateY,
     LAYOUT.button.raisedTranslateY
   );
+
+  const navigation = useNavigation<Navigation>();
+  const payload = { type: "text", text: inputText } as const;
 
   return (
     <KeyboardAvoidingView
@@ -72,7 +83,9 @@ const TextInputViewer = () => {
               className={`items-center py-4 rounded-lg ${
                 isEmptyInputText ? "bg-gray-300" : "bg-[#558BCF]"
               }`}
-              onPress={() => translate({ type: "text", text: inputText })}
+              onPress={() =>
+                navigation.navigate(SCREEN.TranslateViewer, { payload })
+              }
             >
               <Text className="text-base font-bold text-white">입력 완료</Text>
             </TouchableOpacity>
