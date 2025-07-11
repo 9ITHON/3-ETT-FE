@@ -14,6 +14,7 @@ type TranslateScreenRouteProp = RouteProp<
   RootStackParamList,
   typeof SCREEN.TranslateViewer
 >;
+
 type TranslateStatus = "loading" | "success" | "error";
 
 const TranslateViewer = () => {
