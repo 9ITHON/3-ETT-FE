@@ -109,7 +109,10 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
           {/* 메뉴 */}
           <View className="border-t border-gray-200 mt-8">
             <TouchableOpacity>
-              <UserSettingItem label="쉬운말 변환 기록" onPress={() => console.log("쉬운말 변환 기록")} />
+              <UserSettingItem
+                label="쉬운말 변환 기록"
+                onPress={() => navigation.navigate(SCREEN.Archive)}
+              />
             </TouchableOpacity>
             <TouchableOpacity>
               <UserSettingItem label="로그아웃" onPress={() => setShowLogoutModal(true)} />
