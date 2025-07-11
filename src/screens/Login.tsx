@@ -7,12 +7,13 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { SCREEN } from "@/constants/screen";
 import { RootStackParamList } from "@/navigation/Navigation";
 import SpeechBubble from "@/components/common/speechBubble";
-
+import { useAuthStore } from "@/store/useAuthStore";
 
 type Navigation = NativeStackNavigationProp<RootStackParamList>;
 
 const Login = () => {
   const navigation = useNavigation<Navigation>();
+  const { login } = useAuthStore(); // Zustand 훅 사용
   const [activeIndex, setActiveIndex] = useState(0);
   const carouselRef = useRef<any>(null);
 
@@ -59,7 +60,10 @@ const Login = () => {
 
           {/* 카카오로 로그인 */}
           <Pressable
-            onPress={() => console.log("카카오 로그인")}
+            onPress={() => {
+              login(); // 상태 변경
+              navigation.replace(SCREEN.Home); // 로그인 후 이동
+            }}
             className="w-[320px] h-[56px] bg-[#FFE558] rounded-[12px] flex-row items-center justify-center shadow-md"
           >
             <Text className="text-[#333333] text-[20px] leading-[28px] font-bold font-[NanumSquareRoundOTF]">

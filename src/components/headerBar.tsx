@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image, ViewProps } from "react-native";
 import { useState } from "react";
 import UserSetting from "./layout/UserSetting";
+import { useAuthStore } from "@/store/useAuthStore";
 
 type HeaderBarProps = ViewProps & {
   className?: string;
@@ -8,6 +9,7 @@ type HeaderBarProps = ViewProps & {
 
 const HeaderBar = ({ className, ...rest }: HeaderBarProps) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { isLoggedIn } = useAuthStore(); // Zustand에서 가져오기
 
   return (
     <>
@@ -40,7 +42,7 @@ const HeaderBar = ({ className, ...rest }: HeaderBarProps) => {
       {/* 사이드바 */}
       {isSidebarOpen && (
         <UserSetting
-          isLoggedIn={false} // 로그인 여부에 따라 true/false 전달
+          isLoggedIn={isLoggedIn} // Zustand 값 주입
           onClose={() => setIsSidebarOpen(false)}
         />
       )}
