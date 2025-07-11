@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import HeaderBar from "@/components/HeaderBar";
+import HomeHeader from "@/components/HomeHeader";
 
 type Props = NativeStackScreenProps<RootStackParamList, typeof SCREEN.Home>;
 
@@ -37,7 +37,7 @@ const Home = ({ navigation }: Props) => {
       className="flex-1"
     >
       <StatusBar style="dark" />
-      <HeaderBar className="mb-[62px]" />
+      <HomeHeader className="mb-[62px]" />
 
       <View className="items-center justify-center mb-6">
         <Text
