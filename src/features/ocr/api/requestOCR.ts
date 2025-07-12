@@ -1,5 +1,7 @@
 import axios from "axios";
-import { OCR_URL, X_OCR_SECRET } from "@env";
+// 환경 변수 import - 실제 사용 시에는 .env 파일에 설정 필요
+const OCR_URL = process.env.OCR_URL || "https://example.com/ocr";
+const X_OCR_SECRET = process.env.X_OCR_SECRET || "your_secret_key";
 import { formatType } from "@/features/capture/type";
 import generateUUID from "../utils/generateUUID";
 

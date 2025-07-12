@@ -24,7 +24,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={SCREEN.Splash} screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName={SCREEN.Splash} screenOptions={{ headerShown: false }} id={undefined}>
         <Stack.Screen name={SCREEN.Splash} component={Splash} />
         <Stack.Screen
           name={SCREEN.Home}

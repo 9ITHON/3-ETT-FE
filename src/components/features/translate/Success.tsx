@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import useToggleTextSize from "@/hooks/useToggleTextSize";
 import useArchiveEasyText from "@/features/translate/hooks/useArchiveEasyText";
@@ -6,11 +7,40 @@ import useArchiveEasyText from "@/features/translate/hooks/useArchiveEasyText";
 type Props = {
   easyText: string;
   onRetry: () => void;
+  enableTypewriter?: boolean;
 };
 
-const TranslateSuccess = ({ easyText, onRetry }: Props) => {
+const TranslateSuccess = ({ easyText, onRetry, enableTypewriter = false }: Props) => {
   const { textSize, toggleTextSize } = useToggleTextSize();
   const { isArchiveSuccess, handleArchive } = useArchiveEasyText(easyText);
+  
+  // 타자기 효과를 위한 상태
+  const [displayText, setDisplayText] = useState(enableTypewriter ? "" : easyText);
+  const [isTyping, setIsTyping] = useState(enableTypewriter);
+
+  // 타자기 효과 구현
+  useEffect(() => {
+    if (!enableTypewriter) {
+      setDisplayText(easyText);
+      return;
+    }
+
+    setDisplayText("");
+    setIsTyping(true);
+    
+    let index = 0;
+    const typingInterval = setInterval(() => {
+      if (index < easyText.length) {
+        setDisplayText(easyText.substring(0, index + 1));
+        index++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 50); // 50ms 간격으로 한 글자씩 추가
+
+    return () => clearInterval(typingInterval);
+  }, [easyText, enableTypewriter]);
   return (
     <View className="flex-1 bg-white">
       {/* 상단 */}
@@ -48,8 +78,11 @@ const TranslateSuccess = ({ easyText, onRetry }: Props) => {
       <View className="h-[360px] mt-6 mx-4 border border-blue-300 rounded-xl p-4">
         <ScrollView showsVerticalScrollIndicator={true}>
           <Text className={`text-${textSize} leading-relaxed text-black`}>
-            {easyText}
+            {displayText}
           </Text>
+          {isTyping && (
+            <Text className="text-blue-500 animate-pulse">|</Text>
+          )}
         </ScrollView>
       </View>
 

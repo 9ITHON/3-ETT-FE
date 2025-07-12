@@ -1,7 +1,7 @@
+import React, { useCallback, useEffect, useState } from "react";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "@/navigation/Navigation";
 import { SCREEN } from "@/constants/screen";
-import { JSX, useCallback, useEffect, useState } from "react";
 import {
   TranslateError,
   TranslateLoading,
@@ -43,11 +43,15 @@ const TranslateViewer = () => {
     runTranslation();
   }, [runTranslation]);
 
-  const TranslateStatusMapper: Record<TranslateStatus, JSX.Element> = {
+  const TranslateStatusMapper: Record<TranslateStatus, any> = {
     loading: <TranslateLoading />,
     error: <TranslateError onRetry={runTranslation} />,
     success: (
-      <TranslateSuccess easyText={easyText ?? ""} onRetry={runTranslation} />
+      <TranslateSuccess 
+        easyText={easyText ?? ""} 
+        onRetry={runTranslation}
+        enableTypewriter={true}
+      />
     ),
   };
 
