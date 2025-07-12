@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ArchiveHeader from "@/components/ArchiveHeader";
-import ArchiveDetailCard from "@/components/ArchiveDetailCard";
+import ArchiveHeader from "@/components/archive/ArchiveHeader";
+import ArchiveDetailCard from "@/components/archive/ArchiveDetailCard";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { RootStackParamList } from "@/navigation/Navigation";
 

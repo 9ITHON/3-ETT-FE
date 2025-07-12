@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ArchiveHeader from "@/components/ArchiveHeader";
+import ArchiveHeader from "@/components/archive/ArchiveHeader";
 import ArchiveItemCard from "@/components/ArchiveItemCard";
 import { useArchiveStore } from "@/store/useArchiveStore";
 
