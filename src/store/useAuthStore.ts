@@ -1,15 +1,23 @@
-import { create, StateCreator } from "zustand";
+// src/store/useAuthStore.ts
+import { create } from "zustand";
+
+type User = {
+  id: string;
+  nickname: string;
+};
 
 type AuthState = {
   isLoggedIn: boolean;
-  login: () => void;
+  user: User | null;
+  login: (userData: User) => void;
   logout: () => void;
 };
 
-const authStore: StateCreator<AuthState> = (set) => ({
+export const useAuthStore = create<AuthState>((set) => ({
   isLoggedIn: false,
-  login: () => set({ isLoggedIn: true }),
-  logout: () => set({ isLoggedIn: false }),
-});
-
-export const useAuthStore = create<AuthState>(authStore);
+  user: null,
+  login: (userData) =>
+    set({ isLoggedIn: true, user: userData }),
+  logout: () =>
+    set({ isLoggedIn: false, user: null }),
+}));

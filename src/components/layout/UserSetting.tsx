@@ -18,6 +18,7 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const logout = useAuthStore((state) => state.logout); // Zustand 사용
+  const user = useAuthStore((state) => state.user);
 
   return (
     <SafeAreaView
@@ -50,7 +51,7 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
         <View className="mt-4">
           <View className="flex-row items-center mb-6 px-6">
             <Image
-              source={require("../../../assets/images/sample-profile.png")}
+              source={require("../../../assets/images/profile-icon.png")}
               className="w-20 h-20 rounded-full mr-3"
             />
             <View>
@@ -93,7 +94,7 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
                   color: "#333333",
                 }}
               >
-                쉬우니
+                {user?.nickname}
                 <Text
                   style={{
                     fontFamily: "NanumSquareRoundOTF",
@@ -113,8 +114,6 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
                 label="쉬운말 변환 기록"
                 onPress={() => navigation.navigate(SCREEN.Archive)}
               />
-            </TouchableOpacity>
-            <TouchableOpacity>
               <UserSettingItem label="로그아웃" onPress={() => setShowLogoutModal(true)} />
             </TouchableOpacity>
           </View>
@@ -166,6 +165,7 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
             <TouchableOpacity>
               <UserSettingItem label="카카오로 로그인" onPress={() => console.log("카카오로 로그인")} />
             </TouchableOpacity>
+
           </View>
         </View>
       )}
