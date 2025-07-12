@@ -11,7 +11,7 @@ export type RootStackParamList = {
   [SCREEN.TextInput]: undefined;
   [SCREEN.Loading]: undefined;
   [SCREEN.Archive]: undefined;
-  ArchiveDetail: { date: string; content: string; title: string };
+ ArchiveDetail: { id: string; date: string; content: string; title: string };
 };
 
 export type ScreenType = keyof RootStackParamList;

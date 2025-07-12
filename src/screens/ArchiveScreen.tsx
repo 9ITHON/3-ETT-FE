@@ -3,19 +3,25 @@ import { View, Text, Image, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ArchiveHeader from "@/components/ArchiveHeader";
 import ArchiveItemCard from "@/components/ArchiveItemCard";
-import { mockArchiveData } from "@/data/mockArchiveData";
+import { useArchiveStore } from "@/store/useArchiveStore";
 
 const ArchiveScreen = () => {
-  const hasData = mockArchiveData.length > 0;
+  const archiveItems = useArchiveStore((state) => state.archiveItems);
+  const hasData = archiveItems.length > 0;
 
   return (
     <SafeAreaView className="flex-1 bg-[#F4F5F7]">
       <ArchiveHeader />
       {hasData ? (
         <FlatList
-          data={mockArchiveData}
+          data={archiveItems}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ paddingHorizontal: 16, paddingTop: 12, paddingBottom: 32, alignItems: "center", }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingTop: 12,
+            paddingBottom: 32,
+            alignItems: "center",
+          }}
           renderItem={({ item }) => <ArchiveItemCard item={item} />}
         />
       ) : (

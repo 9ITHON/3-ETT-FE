@@ -9,12 +9,12 @@ type DetailRoute = RouteProp<RootStackParamList, "ArchiveDetail">;
 
 const ArchiveDetailScreen = () => {
   const route = useRoute<DetailRoute>();
-  const { date, content, title } = route.params;
+  const { id, date, content, title } = route.params;
 
   return (
     <SafeAreaView className="flex-1 bg-[#F4F5F7]">
       <ArchiveHeader />
-      <ArchiveDetailCard date={date} content={content} title={title} />
+      <ArchiveDetailCard id={id} date={date} content={content} title={title} />
     </SafeAreaView>
   );
 };

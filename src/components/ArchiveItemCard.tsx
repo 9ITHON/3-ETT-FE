@@ -18,12 +18,16 @@ const ArchiveItemCard = ({ item }: ArchiveItemProps) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(SCREEN.ArchiveDetail, {
-        date: item.date,
-        content: item.content,
-        title: item.title,
-        })
-    }>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate(SCREEN.ArchiveDetail, {
+            id: item.id,
+            date: item.date,
+            content: item.content,
+            title: item.title,
+          })
+        }
+      >
       <View
         style={{
           padding: 16,

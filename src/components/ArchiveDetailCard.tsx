@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import ConfirmModal from "@/components/common/ConfirmModal";
+import { useArchiveStore } from "@/store/useArchiveStore";
+import { useNavigation } from "@react-navigation/native";
+import { SCREEN } from "@/constants/screen";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/navigation/Navigation";
+
 
 type Props = {
+  id: string;
   date: string;
   content: string;
   title: string;
@@ -11,11 +18,13 @@ type Props = {
 
 const ArchiveDetailCard = ({ date, content, title }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const deleteByDate = useArchiveStore((state) => state.deleteByDate);
+  const navigation = useNavigation();
 
   const handleDelete = () => {
+    deleteByDate(date); // 삭제
     setIsModalVisible(false);
-    // TODO: 삭제 로직 처리 (예: Zustand, API 등)
-    console.log("기록 삭제 완료");
+    navigation.goBack(); // 뒤로 가기
   };
 
   return (
@@ -151,17 +160,16 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
           기록 삭제하기
         </Text>
       </TouchableOpacity>
-        <ConfirmModal
+      <ConfirmModal
         visible={isModalVisible}
         title="정말 삭제할까요?"
         onCancel={() => setIsModalVisible(false)}
         onConfirm={handleDelete}
-        >
-        {/* 추가 안내 문구 */}
+      >
         <Text className="text-center text-[#999] text-base mb-5 -mt-3 font-[Pretendard]">
-            삭제한 기록은 복구할 수 없어요.
+          삭제한 기록은 복구할 수 없어요.
         </Text>
-        </ConfirmModal>
+      </ConfirmModal>
     </View>
   );
 };
