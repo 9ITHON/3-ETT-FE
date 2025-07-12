@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const TranslateLoading = () => {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <View className="items-center justify-center flex-1 gap-4 m-5">
         <Image
           source={require("assets/gif/loading.gif")}

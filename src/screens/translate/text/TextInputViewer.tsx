@@ -51,7 +51,7 @@ const TextInputViewer = () => {
   const payload = { type: "text", text: inputText } as const;
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <Header title="문장 입력하기" />
       <KeyboardAvoidingView
         className="flex-1 bg-background"

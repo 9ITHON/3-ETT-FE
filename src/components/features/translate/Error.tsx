@@ -9,7 +9,7 @@ interface Props {
 
 const TranslateError = ({ onRetry }: Props) => {
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <Header />
       <View className="items-center justify-center flex-1 px-6 bg-white">
         <Text className="mb-2 text-xl font-bold text-[20px]">번역 실패</Text>

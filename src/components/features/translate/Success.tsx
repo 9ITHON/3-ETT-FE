@@ -12,15 +12,19 @@ import { useURIContext } from "@/features/capture";
 // type
 type Props = {
   easyText: string;
+  translateTime: string;
   onRetry: () => void;
 };
 
-const TranslateSuccess = ({ easyText, onRetry }: Props) => {
+const TranslateSuccess = ({ easyText, translateTime, onRetry }: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const { textSize, toggleTextSize } = useToggleTextSize();
-  const { isArchiveSuccess, handleArchive } = useArchiveEasyText(easyText);
+  const { isArchiveSuccess, handleArchive } = useArchiveEasyText(
+    easyText,
+    translateTime
+  );
   const { setPhotoURI } = useURIContext();
 
   const navigateFeedBack = () => {
@@ -29,7 +33,7 @@ const TranslateSuccess = ({ easyText, onRetry }: Props) => {
   };
 
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 bg-background">
         <Header
           title="번역 결과"

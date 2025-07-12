@@ -1,9 +1,16 @@
+import { BASE_URL } from "@env";
 import axios from "axios";
 
-const BASEURL = "https://example.com/api/save";
+type ArchivePayload = {
+  text: string;
+  timestamp: string;
+};
 
-const archiveEasyText = async (text: string): Promise<void> => {
-  await axios.post(BASEURL, { content: text });
+const archiveEasyText = async ({ text, timestamp }: ArchivePayload) => {
+  await axios.post(`${BASE_URL}/archive/save`, {
+    content: text,
+    translatedAt: timestamp,
+  });
 };
 
 export default archiveEasyText;
