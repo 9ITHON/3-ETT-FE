@@ -16,6 +16,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "@/components/layout";
 
 // type
 type Navigation = NativeStackNavigationProp<
@@ -51,6 +52,7 @@ const TextInputViewer = () => {
 
   return (
     <SafeAreaView className="flex-1">
+      <Header title="문장 입력하기" />
       <KeyboardAvoidingView
         className="flex-1 bg-background"
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -58,13 +60,14 @@ const TextInputViewer = () => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View className="flex-1 px-5 justify-normal">
-            <Text className="mt-5 mb-3 text-lg font-bold">
-              {InitialInputText}
-            </Text>
-
+            <View className="items-center justify-center my-5">
+              <Text className="text-[24px] font-bold text-center">
+                {InitialInputText}
+              </Text>
+            </View>
             <Animated.View style={{ height: textInputHeight }} className="mb-5">
               <TextInput
-                className="flex-1 p-3 text-base bg-white border rounded-lg border-outline"
+                className="flex-1 p-3 text-[18px] bg-white border rounded-lg border-outline"
                 placeholder={InitialInputText}
                 multiline
                 scrollEnabled

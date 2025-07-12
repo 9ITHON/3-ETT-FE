@@ -33,7 +33,11 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <LinearGradient colors={["#F4F5F7", "#DBE7FF"]} className="flex-1">
-      <StatusBar style="dark" />
+      <StatusBar
+        style="dark"
+        backgroundColor="#ffffff"
+        translucent={true} // ✅ iOS에서 상태바 영역을 헤더가 밀어내도록
+      />
       <HomeHeader className="mb-[62px]" />
 
       <View className="items-center justify-center mb-6">
