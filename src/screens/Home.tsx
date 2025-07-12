@@ -128,23 +128,6 @@ const Home = ({ navigation }: Props) => {
             </Text>
           </TouchableOpacity>
         </View>
-
-        {/* 임시 로딩 텍스트 버튼 (작고 아래쪽) */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate(SCREEN.Loading)}
-          className="mt-3"
-        >
-          <Text
-            style={{
-              fontSize: 14,
-              color: "#666",
-              fontFamily: "NanumSquareRoundOTF",
-              textAlign: "center",
-            }}
-          >
-            임시 로딩
-          </Text>
-        </TouchableOpacity>
       </View>
     </LinearGradient>
   );

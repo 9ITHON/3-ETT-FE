@@ -7,8 +7,7 @@ import {
   TranslateLoading,
   TranslateSuccess,
 } from "@/components";
-import { MockTranslatedText } from "@/api/mock/mockData";
-import axios from "axios";
+import { translate } from "@/features/translate";
 
 // type
 type TranslateScreenRouteProp = RouteProp<
@@ -20,20 +19,20 @@ type TranslateStatus = "loading" | "success" | "error";
 
 const TranslateViewer = () => {
   const { payload } = useRoute<TranslateScreenRouteProp>().params;
-
+  const [tarnslateTime, setTranslateTime] = useState("");
   // 번역 상태
   const [translateStatus, setTranslateStatus] =
     useState<TranslateStatus>("error");
 
   // 번역 결과물
-  const [easyText, setEasyText] = useState<string | null>(MockTranslatedText); // 성공을 위한 임시 텍스트
+  const [easyText, setEasyText] = useState<string | null>(null); // 성공을 위한 임시 텍스트
 
   const runTranslation = useCallback(async () => {
     setTranslateStatus("loading");
     try {
-      // const easyText = await translate(payload); // clova api 호출을 막기 위한 주석
+      const { easyText, timestamp } = await translate(payload);
+      setTranslateTime(timestamp); // 번역 시간을 저장합니다.
       setEasyText(easyText);
-      // throw new Error(); // error 처리를 위한 주석
       setTranslateStatus("success");
     } catch (e) {
       setTranslateStatus("error");
