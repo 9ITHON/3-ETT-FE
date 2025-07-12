@@ -8,6 +8,7 @@ import {
   TranslateSuccess,
 } from "@/components";
 import { MockTranslatedText } from "@/api/mock/mockData";
+import axios from "axios";
 
 // type
 type TranslateScreenRouteProp = RouteProp<

@@ -15,6 +15,7 @@ import {
   Animated,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // type
 type Navigation = NativeStackNavigationProp<
@@ -49,50 +50,54 @@ const TextInputViewer = () => {
   const payload = { type: "text", text: inputText } as const;
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1 bg-background"
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View className="flex-1 px-5 justify-normal">
-          <Text className="mt-5 mb-3 text-lg font-bold">
-            {InitialInputText}
-          </Text>
+    <SafeAreaView className="flex-1">
+      <KeyboardAvoidingView
+        className="flex-1 bg-background"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View className="flex-1 px-5 justify-normal">
+            <Text className="mt-5 mb-3 text-lg font-bold">
+              {InitialInputText}
+            </Text>
 
-          <Animated.View style={{ height: textInputHeight }} className="mb-5">
-            <TextInput
-              className="flex-1 p-3 text-base bg-white border rounded-lg border-outline"
-              placeholder={InitialInputText}
-              multiline
-              scrollEnabled
-              value={inputText}
-              onChangeText={setInputText}
-              textAlignVertical="top"
-            />
-          </Animated.View>
+            <Animated.View style={{ height: textInputHeight }} className="mb-5">
+              <TextInput
+                className="flex-1 p-3 text-base bg-white border rounded-lg border-outline"
+                placeholder={InitialInputText}
+                multiline
+                scrollEnabled
+                value={inputText}
+                onChangeText={setInputText}
+                textAlignVertical="top"
+              />
+            </Animated.View>
 
-          <Animated.View
-            style={{
-              transform: [{ translateY: buttonTranslateY }],
-            }}
-            className="mb-6"
-          >
-            <TouchableOpacity
-              disabled={isEmptyInputText}
-              className={`items-center py-4 rounded-lg ${
-                isEmptyInputText ? "bg-gray-300" : "bg-[#558BCF]"
-              }`}
-              onPress={() =>
-                navigation.navigate(SCREEN.TranslateViewer, { payload })
-              }
+            <Animated.View
+              style={{
+                transform: [{ translateY: buttonTranslateY }],
+              }}
+              className="mb-6"
             >
-              <Text className="text-base font-bold text-white">입력 완료</Text>
-            </TouchableOpacity>
-          </Animated.View>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+              <TouchableOpacity
+                disabled={isEmptyInputText}
+                className={`items-center py-4 rounded-lg ${
+                  isEmptyInputText ? "bg-gray-300" : "bg-[#558BCF]"
+                }`}
+                onPress={() =>
+                  navigation.navigate(SCREEN.TranslateViewer, { payload })
+                }
+              >
+                <Text className="text-base font-bold text-white">
+                  입력 완료
+                </Text>
+              </TouchableOpacity>
+            </Animated.View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
