@@ -5,11 +5,9 @@ import ConfirmModal from "@/components/common/ConfirmModal";
 import { useArchiveStore } from "@/store/useArchiveStore";
 import { useNavigation } from "@react-navigation/native";
 import useToggleTextSize from "@/hooks/useToggleTextSize";
-import { SCREEN } from "@/constants/screen";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/navigation/Navigation";
 import * as Clipboard from "expo-clipboard";
 import { Alert } from "react-native";
+import { deleteArchive } from "@/api/archive";
 
 type Props = {
   id: string;
@@ -18,17 +16,24 @@ type Props = {
   title: string;
 };
 
-const ArchiveDetailCard = ({ date, content, title }: Props) => {
+const ArchiveDetailCard = ({ id, date, content, title }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const deleteByDate = useArchiveStore((state) => state.deleteByDate);
   const navigation = useNavigation();
   const { textSize, toggleTextSize } = useToggleTextSize();
 
-  const handleDelete = () => {
-    deleteByDate(date); // 삭제
-    setIsModalVisible(false);
+const handleDelete = async () => {
+  try {
+    await deleteArchive(id); // API 요청
+    Alert.alert("삭제 완료", "기록이 삭제되었습니다.");
     navigation.goBack(); // 뒤로 가기
-  };
+  } catch (error) {
+    console.error("삭제 실패:", error);
+    Alert.alert("삭제 실패", "다시 시도해주세요.");
+  } finally {
+    setIsModalVisible(false);
+  }
+};
 
   return (
     <View className="px-6 pb-10 w-full">
