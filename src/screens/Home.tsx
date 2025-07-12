@@ -75,7 +75,7 @@ const Home = ({ navigation }: Props) => {
               shadowRadius: 8,
               elevation: 4,
             }}
-            onPress={() => navigation.navigate(SCREEN.TextInput)}
+            onPress={() => navigation.navigate(SCREEN.TextInputViewer)}
           >
             <Image
               source={require("../../assets/images/enterSentence-icon.png")}

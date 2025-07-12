@@ -58,14 +58,13 @@ export const requestOCR = async (photoInfo: PhotoInfo): Promise<OCRText> => {
       },
       timeout: API_TIMEOUT,
     });
-    if (status !== 200) throw new Error(`HTTP_${status}`); // TODO: status code management
+    if (status !== 200) throw new Error(`HTTP_${status}`);
 
     const img = data?.images?.[0];
-    // TODO: inferResult type 정의
     if (img?.inferResult !== "SUCCESS")
       throw new Error(`OCR_${img?.inferResult}`);
 
-    return { texts: (img?.fields ?? []).map((f: any) => f.inferText) }; // 내부의 text만 return
+    return { texts: (img?.fields ?? []).map((f: any) => f.inferText) };
   } catch (err: any) {
     // error
     if (axios.isAxiosError(err)) {

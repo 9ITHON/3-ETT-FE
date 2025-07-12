@@ -1,17 +1,20 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
-import { Home, Loading, Splash, PhotoCapture, TextInput, Login, Archive, ArchiveDetail } from "@/screens";
+import { Home, Loading, Splash, PhotoCapture, TextInputViewer, Login, Archive, ArchiveDetail } from "@/screens";
+import { TranslatePayload } from "@/features/translate/types";
+import TranslateViewer from "@/screens/translate/complete/TranslateViewer";
 
 export type RootStackParamList = {
   [SCREEN.Splash]: undefined;
   [SCREEN.Login]: undefined;
   [SCREEN.Home]: undefined;
   [SCREEN.PhotoCapture]: undefined;
-  [SCREEN.TextInput]: undefined;
+  [SCREEN.TextInputViewer]: undefined;
   [SCREEN.Loading]: undefined;
   [SCREEN.Archive]: undefined;
- ArchiveDetail: { id: string; date: string; content: string; title: string };
+  [SCREEN.ArchiveDetail]: { id: string; date: string; content: string; title: string };
+  [SCREEN.TranslateViewer]: { payload: TranslatePayload };
 };
 
 export type ScreenType = keyof RootStackParamList;
@@ -34,14 +37,19 @@ const Navigation = () => {
           options={{ title: "로그인" }}
         />
         <Stack.Screen
-          name={SCREEN.TextInput}
-          component={TextInput}
+          name={SCREEN.TextInputViewer}
+          component={TextInputViewer}
           options={{ title: "문장 입력" }}
         />
         <Stack.Screen
           name={SCREEN.PhotoCapture}
           component={PhotoCapture}
           options={{ title: "문서 사진 촬영" }}
+        />
+        <Stack.Screen
+          name={SCREEN.TranslateViewer}
+          component={TranslateViewer}
+          options={{ title: "번역 결과" }}
         />
         <Stack.Screen
           name={"Loading"}

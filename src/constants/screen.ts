@@ -6,7 +6,7 @@ export const SCREEN = {
   ArchiveDetail: "ArchiveDetail",
   PhotoCapture: "PhotoCapture",
   PhotoPreview: "PhotoPreview",
-  TextInput: "TextInput",
-  TranslateComplete: "TranslateComplete",
+  TextInputViewer: "TextInputViewer",
+  TranslateViewer: "TranslateViewer",
   Loading: "Loading",
 } as const;

@@ -4,3 +4,4 @@ export * from "./translate";
 export { default as Splash } from "./layout/Splash";
 export { default as Login } from "./Login";
 export { default as Archive } from "./ArchiveScreen";
+export { default as TextInputViewer } from "./translate/text/TextInputViewer";
