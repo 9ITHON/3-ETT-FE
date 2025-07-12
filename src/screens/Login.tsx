@@ -8,6 +8,7 @@ import { SCREEN } from "@/constants/screen";
 import { RootStackParamList } from "@/navigation/Navigation";
 import SpeechBubble from "@/components/common/speechBubble";
 import { useAuthStore } from "@/store/useAuthStore";
+import { startKakaoLogin } from "@/api/auth";
 
 type Navigation = NativeStackNavigationProp<RootStackParamList>;
 
@@ -60,9 +61,13 @@ const Login = () => {
 
           {/* 카카오로 로그인 */}
           <Pressable
-            onPress={() => {
-              login(); // 상태 변경
-              navigation.replace(SCREEN.Home); // 로그인 후 이동
+            onPress={async () => {
+              try {
+                await startKakaoLogin();
+                navigation.replace(SCREEN.Home);
+              } catch (e) {
+                console.error("로그인 오류:", e);
+              }
             }}
             className="w-[320px] h-[56px] bg-[#FFE558] rounded-[12px] flex-row items-center justify-center shadow-md"
           >

@@ -4,6 +4,7 @@ import { SCREEN } from "@/constants/screen";
 import { Home, Loading, Splash, PhotoCapture, TextInputViewer, Login, Archive, ArchiveDetail } from "@/screens";
 import { TranslatePayload } from "@/features/translate/types";
 import TranslateViewer from "@/screens/translate/complete/TranslateViewer";
+import { useHandleAuthRedirect } from "@/hooks/useHandleAuthRedirect";
 
 export type RootStackParamList = {
   [SCREEN.Splash]: undefined;
@@ -22,6 +23,8 @@ export type ScreenType = keyof RootStackParamList;
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
+useHandleAuthRedirect();
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={SCREEN.Splash} screenOptions={{ headerShown: false }}>

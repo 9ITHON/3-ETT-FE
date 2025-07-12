@@ -1,16 +1,18 @@
-// screens/ArchiveScreen.tsx
 import React, { useState, useMemo } from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import {  View, Text, FlatList, Image, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ArchiveHeader from "@/components/archive/ArchiveHeader";
 import ArchiveItemCard from "@/components/archive/ArchiveItemCard";
-import { useArchiveStore } from "@/store/useArchiveStore";
 import SearchBar from "@/components/archive/SearchBar";
+import { useArchiveStore } from "@/store/useArchiveStore";
 
 const ArchiveScreen = () => {
   const archiveItems = useArchiveStore((state) => state.archiveItems);
   const [query, setQuery] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
+  // 검색 필터링
   const filteredItems = useMemo(() => {
     if (query.trim() === "") return archiveItems;
     return archiveItems.filter(
@@ -22,10 +24,27 @@ const ArchiveScreen = () => {
 
   const handleClear = () => setQuery("");
 
+  // Pull to refresh
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // TODO: 실제 데이터 새로고침 로직
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setRefreshing(false);
+  };
+
+  // 무한스크롤
+  const handleLoadMore = async () => {
+    if (isLoadingMore || query !== "") return; // 검색 중엔 무한스크롤 중단
+    setIsLoadingMore(true);
+    // TODO: 데이터 추가 로딩 로직
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsLoadingMore(false);
+  };
+
   const hasData = filteredItems.length > 0;
 
   return (
-    <SafeAreaView className="flex-1 bg-[#F4F5F7]">
+    <SafeAreaView className="flex-1 bg-white">
       <ArchiveHeader />
       <SearchBar
         query={query}
@@ -38,6 +57,17 @@ const ArchiveScreen = () => {
         <FlatList
           data={filteredItems}
           keyExtractor={(item) => item.id}
+          onRefresh={onRefresh}
+          refreshing={refreshing}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.4}
+          ListFooterComponent={
+            isLoadingMore ? (
+              <View style={{ paddingVertical: 24 }}>
+                <ActivityIndicator size="large" color="#999999" style={{ transform: [{ scale: 0.9 }] }} />
+              </View>
+            ) : null
+          }
           contentContainerStyle={{
             paddingHorizontal: 16,
             paddingTop: 12,

@@ -1,4 +1,3 @@
-// store/useArchiveStore.ts
 import { create } from "zustand";
 
 export type ArchiveItem = {

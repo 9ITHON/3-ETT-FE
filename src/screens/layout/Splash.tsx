@@ -18,7 +18,7 @@ const Splash = () => {
   return (
     <View className="flex-1 items-center justify-center" style={{ backgroundColor: "#F4F5F7" }}>
       <Image
-        source={require("../../../assets/images/logo-splash.gif")}
+        source={require("../../../assets/gif/icon.gif")}
         style={{ width: 160, height: 160 }}
         resizeMode="contain"
       />

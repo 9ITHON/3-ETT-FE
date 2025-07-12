@@ -8,6 +8,8 @@ import { SCREEN } from "@/constants/screen";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@/navigation/Navigation";
 import { useAuthStore } from "@/store/useAuthStore";
+import { logoutRequest } from "@/api/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type UserSettingProps = {
   isLoggedIn: boolean;
@@ -17,7 +19,7 @@ type UserSettingProps = {
 const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const logout = useAuthStore((state) => state.logout); // Zustand 사용
+  const logout = useAuthStore((state) => state.logout);
   const user = useAuthStore((state) => state.user);
 
   return (
@@ -146,7 +148,6 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
               }}
             />
           </View>
-
           <Text
             style={{
               fontFamily: "Pretendard",
@@ -175,11 +176,17 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
         visible={showLogoutModal}
         title="로그아웃할까요?"
         onCancel={() => setShowLogoutModal(false)}
-        onConfirm={() => {
-          logout(); // 상태 초기화
+        onConfirm={async () => {
+          try {
+            await logoutRequest();
+          } catch (err) {
+            console.warn("서버 로그아웃 실패", err);
+          }
+          logout(); // Zustand 초기화
+          await AsyncStorage.clear(); // (선택) 모든 저장된 토큰 삭제
           setShowLogoutModal(false);
           onClose(); // 사이드바 닫기
-          navigation.replace(SCREEN.Login);
+          navigation.replace(SCREEN.Login); // 로그인 화면으로 이동
         }}
       />
     </SafeAreaView>
