@@ -33,7 +33,8 @@
     "react-native-svg": "^15.12.0",
     "react-native-uuid": "^2.0.3",
     "zustand": "^5.0.6",
-    "expo-blur": "~14.1.5"
+    "expo-blur": "~14.1.5",
+    "expo-clipboard": "~7.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
