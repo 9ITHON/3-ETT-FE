@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, ScrollView, Share } from "react-native";
 import ConfirmModal from "@/components/common/ConfirmModal";
 import { useArchiveStore } from "@/store/useArchiveStore";
 import { useNavigation } from "@react-navigation/native";
+import useToggleTextSize from "@/hooks/useToggleTextSize";
 import { SCREEN } from "@/constants/screen";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@/navigation/Navigation";
@@ -21,6 +22,7 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const deleteByDate = useArchiveStore((state) => state.deleteByDate);
   const navigation = useNavigation();
+  const { textSize, toggleTextSize } = useToggleTextSize();
 
   const handleDelete = () => {
     deleteByDate(date); // 삭제
@@ -31,23 +33,46 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
   return (
     <View className="px-6 pb-10 w-full">
       {/* 날짜 */}
-      <Text
-        style={{
+      <View className="flex-row justify-between items-center mb-3">
+        <Text
+          style={{
             fontFamily: "Pretendard",
             fontStyle: "normal",
             fontWeight: "400",
             fontSize: 16,
             lineHeight: 19,
             color: "#999999",
-        }}
-        className="mb-3"
+          }}
         >
-        {date}
+          {date}
         </Text>
+
+        {/* 글자 크기 조절 */}
+        <TouchableOpacity
+          onPress={toggleTextSize}
+          className="flex-row items-center px-3 py-2 bg-white rounded-full"
+        >
+          <Text
+            className={`text-[15.5px] mr-1 ${
+              textSize === "base" ? "font-bold" : "font-normal"
+            }`}
+          >
+            가
+          </Text>
+          <Text className="text-sm text-gray-500">|</Text>
+          <Text
+            className={`text-[18px] ml-1 ${
+              textSize === "lg" ? "font-bold" : "font-normal"
+            }`}
+          >
+            가
+          </Text>
+        </TouchableOpacity>
+      </View>
 
       {/* 텍스트 박스 */}
       <LinearGradient
-        colors={["#FFFFFF", "#FFFFFF", "rgba(255,255,255,0.75)", "rgba(255,255,255,0)"]}
+        colors={["#FFFFFF", "rgba(255,255,255,0.75)", "rgba(255,255,255,0)"]}
         locations={[0, 0.5, 0.75, 1]}
         start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
@@ -73,28 +98,29 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
           persistentScrollbar={true}
         >
             <Text
-            className="mb-2"
-            style={{
+              className="mb-2"
+              style={{
                 fontFamily: "Pretendard",
-                fontSize: 18,
-                lineHeight: 30,
+                fontSize: textSize === "base" ? 18 : 22,
+                lineHeight: textSize === "base" ? 30 : 34,
                 fontWeight: "700",
                 color: "#333333",
-            }}
+              }}
             >
-            {title}
+              {title}
             </Text>
+
             <Text
-                style={{
+              style={{
                 fontFamily: "Pretendard",
-                fontSize: 18,
-                lineHeight: 28,
+                fontSize: textSize === "base" ? 18 : 22,
+                lineHeight: textSize === "base" ? 28 : 32,
                 color: "#333333",
-                }}
+              }}
             >
-                {content}
+              {content}
             </Text>
-            </ScrollView>
+          </ScrollView>
         </View>
         </LinearGradient>
 
