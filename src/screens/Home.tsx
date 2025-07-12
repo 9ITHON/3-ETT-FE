@@ -32,10 +32,7 @@ const Home = ({ navigation }: Props) => {
   }, []);
 
   return (
-    <LinearGradient
-      colors={["#F4F5F7", "#DBE7FF"]}
-      className="flex-1"
-    >
+    <LinearGradient colors={["#F4F5F7", "#DBE7FF"]} className="flex-1">
       <StatusBar style="dark" />
       <HomeHeader className="mb-[62px]" />
 
@@ -63,7 +60,7 @@ const Home = ({ navigation }: Props) => {
       </View>
 
       {/* 버튼 그룹 */}
-      <View className="w-full px-6 items-center mt-6">
+      <View className="items-center w-full px-6 mt-6">
         <View className="flex-row justify-center gap-4">
           {/* 문장 입력하기 */}
           <TouchableOpacity

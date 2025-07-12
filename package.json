@@ -14,6 +14,7 @@
     "@react-navigation/native-stack": "^7.3.21",
     "axios": "^1.10.0",
     "expo": "~53.0.17",
+    "expo-blur": "~14.1.5",
     "expo-camera": "~16.1.10",
     "expo-font": "~13.3.2",
     "expo-image": "~2.3.2",
@@ -21,6 +22,7 @@
     "expo-linear-gradient": "~14.1.5",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",
+    "lucide-react-native": "^0.525.0",
     "nativewind": "^2.0.11",
     "react": "19.0.0",
     "react-native": "0.79.5",
@@ -32,8 +34,7 @@
     "react-native-screens": "~4.11.1",
     "react-native-svg": "^15.12.0",
     "react-native-uuid": "^2.0.3",
-    "zustand": "^5.0.6",
-    "expo-blur": "~14.1.5"
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
