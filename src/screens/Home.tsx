@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import HomeHeader from "@/components/HomeHeader";
+import HomeHeader from "@/components/layout/HomeHeader";
 
 type Props = NativeStackScreenProps<RootStackParamList, typeof SCREEN.Home>;
 
