@@ -9,7 +9,7 @@ const Capture = () => {
   const pickPicture = usePickLibrary();
   return (
     <>
-      <Header title="문서 사진 촬영" showCallback={false} />
+      <Header title="문서 사진 촬영" />
       <View className="h-[540px]">
         <CameraViewer cameraRef={cameraRef} flashMode={flashMode} />
       </View>

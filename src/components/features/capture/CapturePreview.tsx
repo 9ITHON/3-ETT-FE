@@ -21,7 +21,7 @@ const CapturePreview = () => {
 
   return (
     <View className="flex-1">
-      <Header title="사진 선택" showCallback={false} />
+      <Header title="사진 선택" />
 
       <Image source={{ uri: photoURI as string }} className=" h-[540px]" />
       <View className="flex-row mt-[20px] px-[20px] space-x-[16px] w-full">

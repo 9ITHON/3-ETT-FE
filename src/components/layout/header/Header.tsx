@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ArrowLeft } from "lucide-react-native";
+import { ArrowLeft, XIcon } from "lucide-react-native";
 
 interface Props {
   showBack?: boolean;
@@ -32,9 +32,13 @@ const Header = ({ showBack = true, title, callback, callbackText }: Props) => {
 
       {callbackText ? (
         <TouchableOpacity onPress={callback} className="p-1">
-          <Text className="text-[20px] font-medium text-black">
-            {callbackText}
-          </Text>
+          {callbackText === "x" ? (
+            <XIcon size={32} color="#222" />
+          ) : (
+            <Text className="text-[20px] font-medium text-black">
+              {callbackText}
+            </Text>
+          )}
         </TouchableOpacity>
       ) : (
         <View className="w-[28px]" />

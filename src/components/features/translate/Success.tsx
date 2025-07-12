@@ -3,7 +3,11 @@ import useToggleTextSize from "@/hooks/useToggleTextSize";
 import useArchiveEasyText from "@/features/translate/hooks/useArchiveEasyText";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "@/components/layout";
-import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/navigation/Navigation";
+import { SCREEN } from "@/constants/screen";
+import { useURIContext } from "@/features/capture";
 
 // type
 type Props = {
@@ -12,10 +16,17 @@ type Props = {
 };
 
 const TranslateSuccess = ({ easyText, onRetry }: Props) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const { textSize, toggleTextSize } = useToggleTextSize();
   const { isArchiveSuccess, handleArchive } = useArchiveEasyText(easyText);
+  const { setPhotoURI } = useURIContext();
 
-  const navigateFeedBack = () => {};
+  const navigateFeedBack = () => {
+    navigation.navigate(SCREEN.FeedBack);
+    setPhotoURI(null);
+  };
 
   return (
     <SafeAreaView className="flex-1">

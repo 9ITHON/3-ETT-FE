@@ -9,4 +9,5 @@ export const SCREEN = {
   TextInputViewer: "TextInputViewer",
   TranslateViewer: "TranslateViewer",
   Loading: "Loading",
+  FeedBack: "FeedBack",
 } as const;
