@@ -28,7 +28,7 @@ const ArchiveHeader = () => {
         style={{ position: "absolute", left: 16 }}
       >
         <Image
-          source={require("../../assets/images/arrow-left.png")}
+          source={require("../../../assets/images/arrow-left.png")}
           style={{ width: 32, height: 32 }}
         />
       </TouchableOpacity>

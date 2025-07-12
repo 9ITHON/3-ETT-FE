@@ -27,7 +27,7 @@ const ArchiveScreen = () => {
       ) : (
         <View className="flex-1 items-center justify-center -mt-16">
           <Image
-            source={require("../../assets/images/archive-empty.png")}
+            source={require("../../../assets/images/archive-empty.png")}
             style={{ width: 200, height: 205 }}
             resizeMode="contain"
           />

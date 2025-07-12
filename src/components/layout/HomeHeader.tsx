@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image, ViewProps } from "react-native";
 import { useState } from "react";
-import UserSetting from "./layout/UserSetting";
+import UserSetting from "./UserSetting";
 import { useAuthStore } from "@/store/useAuthStore";
 
 type HeaderBarProps = ViewProps & {
@@ -32,7 +32,7 @@ const HeaderBar = ({ className, ...rest }: HeaderBarProps) => {
 
         <TouchableOpacity onPress={() => setIsSidebarOpen(true)}>
           <Image
-            source={require("../../assets/images/user-setting-icon.png")}
+            source={require("../../../assets/images/user-setting-icon.png")}
             style={{ width: 32, height: 32 }}
             resizeMode="contain"
           />
