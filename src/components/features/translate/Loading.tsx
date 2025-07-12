@@ -1,10 +1,13 @@
 import { View, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const TranslateLoading = () => {
   return (
-    <View>
-      <Text>TranslateLoading</Text>
-    </View>
+    <SafeAreaView className="flex-1">
+      <View>
+        <Text>TranslateLoading</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 
