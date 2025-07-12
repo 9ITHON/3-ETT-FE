@@ -1,5 +1,4 @@
 import Svg, { Path } from "react-native-svg";
-import React from "react";
 
 export const AlbumSvg = () => (
   <Svg width="40" height="40" viewBox="0 0 40 41" fill="none">

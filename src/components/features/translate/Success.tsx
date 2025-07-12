@@ -2,6 +2,8 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import useToggleTextSize from "@/hooks/useToggleTextSize";
 import useArchiveEasyText from "@/features/translate/hooks/useArchiveEasyText";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Header } from "@/components/layout";
+import { LinearGradient } from "expo-linear-gradient";
 
 // type
 type Props = {
@@ -12,21 +14,28 @@ type Props = {
 const TranslateSuccess = ({ easyText, onRetry }: Props) => {
   const { textSize, toggleTextSize } = useToggleTextSize();
   const { isArchiveSuccess, handleArchive } = useArchiveEasyText(easyText);
+
+  const navigateFeedBack = () => {};
+
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-1 bg-white">
-        {/* 상단 */}
+      <View className="flex-1 bg-background">
+        <Header
+          title="번역 결과"
+          callback={navigateFeedBack}
+          callbackText="확인"
+        />
         <View className="flex-row items-center justify-between px-4 pt-4">
           <TouchableOpacity
             onPress={onRetry}
-            className="px-4 py-2 bg-gray-100 rounded-full"
+            className="px-4 py-2 bg-white rounded-full shadow-sm"
           >
-            <Text className="text-sm">↻ 다시 시도</Text>
+            <Text className="text-[16px]">↻ 다시 시도</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={toggleTextSize}
-            className="flex-row items-center px-4 py-2 bg-gray-100 rounded-full"
+            className="flex-row items-center px-4 py-2 bg-white rounded-full shadow-sm"
           >
             <Text
               className={`text-[15.5px] mr-1 ${
@@ -47,7 +56,8 @@ const TranslateSuccess = ({ easyText, onRetry }: Props) => {
         </View>
 
         {/* 결과 텍스트 영역 */}
-        <View className="h-[360px] mt-6 mx-4 border border-blue-300 rounded-xl p-4">
+
+        <View className="h-[360px] mt-6 mx-4 border bg-white border-[#CEE2FF] rounded-xl p-4">
           <ScrollView showsVerticalScrollIndicator={true}>
             <Text className={`text-${textSize} leading-relaxed text-black`}>
               {easyText}
@@ -56,15 +66,15 @@ const TranslateSuccess = ({ easyText, onRetry }: Props) => {
         </View>
 
         {/* 복사/공유 버튼 */}
-        <View className="flex-row justify-around px-4 mt-6">
-          <TouchableOpacity className="flex-1 py-3 mr-2 bg-white border border-blue-500 rounded-xl">
-            <Text className="font-semibold text-center text-blue-500">
+        <View className="flex-row justify-around px-4 mt-[24px]">
+          <TouchableOpacity className="flex-1 h-[52px] py-3 mr-2 bg-white border border-[#D3D8E1] rounded-[5px] align-middle justify-center">
+            <Text className="font-semibold text-center text-[#558BCF] text-[20px]">
               복사하기
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className="flex-1 py-3 ml-2 bg-white border border-blue-500 rounded-xl">
-            <Text className="font-semibold text-center text-blue-500">
+          <TouchableOpacity className="flex-1 h-[52px] py-3 ml-2 bg-white border border-[#D3D8E1] rounded-[5px] align-middle justify-center">
+            <Text className="font-semibold text-center text-[#558BCF] text-[20px]">
               공유하기
             </Text>
           </TouchableOpacity>
@@ -74,11 +84,11 @@ const TranslateSuccess = ({ easyText, onRetry }: Props) => {
         <TouchableOpacity
           onPress={handleArchive}
           disabled={isArchiveSuccess}
-          className={`py-4 mx-4 mt-6 rounded-full ${
-            isArchiveSuccess ? "bg-gray-300" : "bg-blue-500"
+          className={`py-4 mx-4 mt-[16px] rounded-full ${
+            isArchiveSuccess ? "bg-gray-300" : "bg-[#558BCF]"
           }`}
         >
-          <Text className="text-base font-bold text-center text-white">
+          <Text className="text-base font-bold text-center text-white text-[20px]">
             {isArchiveSuccess ? "결과 저장 완료" : "결과 저장하기"}
           </Text>
         </TouchableOpacity>
