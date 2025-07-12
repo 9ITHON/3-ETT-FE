@@ -32,7 +32,8 @@ const ArchiveItemCard = ({ item }: ArchiveItemProps) => {
         style={{
           padding: 16,
           gap: 8,
-          width: 340,
+          marginLeft: 4,
+          marginRight: 4,
           height: 125,
           backgroundColor: "#FFFFFF",
           borderColor: "#D3D8E1",

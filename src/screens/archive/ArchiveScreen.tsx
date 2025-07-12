@@ -1,20 +1,42 @@
-import React from "react";
-import { View, Text, Image, FlatList } from "react-native";
+// screens/ArchiveScreen.tsx
+import React, { useState, useMemo } from "react";
+import { View, Text, FlatList, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ArchiveHeader from "@/components/archive/ArchiveHeader";
 import ArchiveItemCard from "@/components/archive/ArchiveItemCard";
 import { useArchiveStore } from "@/store/useArchiveStore";
+import SearchBar from "@/components/archive/SearchBar";
 
 const ArchiveScreen = () => {
   const archiveItems = useArchiveStore((state) => state.archiveItems);
-  const hasData = archiveItems.length > 0;
+  const [query, setQuery] = useState("");
+
+  const filteredItems = useMemo(() => {
+    if (query.trim() === "") return archiveItems;
+    return archiveItems.filter(
+      (item) =>
+        item.title.includes(query.trim()) ||
+        item.content.includes(query.trim())
+    );
+  }, [query, archiveItems]);
+
+  const handleClear = () => setQuery("");
+
+  const hasData = filteredItems.length > 0;
 
   return (
     <SafeAreaView className="flex-1 bg-[#F4F5F7]">
       <ArchiveHeader />
+      <SearchBar
+        query={query}
+        onChangeQuery={setQuery}
+        onClear={handleClear}
+        onSearch={() => {}}
+      />
+
       {hasData ? (
         <FlatList
-          data={archiveItems}
+          data={filteredItems}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{
             paddingHorizontal: 16,
