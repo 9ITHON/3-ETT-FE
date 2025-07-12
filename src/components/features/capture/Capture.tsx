@@ -1,7 +1,8 @@
 import { useCamera, usePickLibrary } from "@/features/capture";
 import CameraViewer from "./CameraViewer";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Header } from "@/components/layout";
+import { AlbumSvg, CameraSvg, FlashSvg } from "@/components/atom/svg";
 
 const Capture = () => {
   const { cameraRef, capture, flashMode, toggleFlash } = useCamera();
@@ -13,25 +14,31 @@ const Capture = () => {
         <CameraViewer cameraRef={cameraRef} flashMode={flashMode} />
       </View>
 
-      {/*  camera view under section */}
-      <View className="flex-row items-center justify-around px-8 py-4 bg-background">
+      <View className="flex-row items-center justify-around px-8 py-[20px] bg-background">
+        {/* 사진첩 */}
         <TouchableOpacity
           onPress={pickPicture}
-          className="items-center justify-center w-16 h-16 rounded-full shadow bg-slate-400"
+          className="items-center justify-center w-[84px] aspect-square "
         >
-          <View className="w-8 h-8" />
+          <AlbumSvg />
+          <Text className=" text-center text-[#3F6AAF]">사진첩</Text>
         </TouchableOpacity>
+
+        {/* 촬영 */}
         <TouchableOpacity
           onPress={capture}
-          className="items-center justify-center w-16 h-16 bg-white rounded-full shadow"
+          className="items-center justify-center w-[84px] aspect-square bg-white rounded-full shadow"
         >
-          <View className="w-8 h-8" />
+          <CameraSvg />
         </TouchableOpacity>
+
+        {/* 플래시 */}
         <TouchableOpacity
           onPress={toggleFlash}
-          className="items-center justify-center w-16 h-16 rounded-full shadow bg-slate-400"
+          className="items-center justify-center w-[84px] aspect-square "
         >
-          <View className="w-8 h-8" />
+          <FlashSvg />
+          <Text className="mt-2 text-center text-[#3F6AAF]">플래쉬</Text>
         </TouchableOpacity>
       </View>
     </>

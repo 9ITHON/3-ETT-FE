@@ -10,7 +10,7 @@ const PhotoCapture = () => {
   const { photoURI } = useURIContext();
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-1">
+      <View className="flex-1 bg-background">
         {photoURI ? <CapturePreview /> : <Capture />}
       </View>
     </SafeAreaView>

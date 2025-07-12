@@ -71,6 +71,7 @@ const TextInputViewer = () => {
                 value={inputText}
                 onChangeText={setInputText}
                 textAlignVertical="top"
+                returnKeyType="search" // ✅ 키보드에 '검색' 표시
               />
             </Animated.View>
 
