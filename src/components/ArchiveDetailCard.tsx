@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Share } from "react-native";
 import ConfirmModal from "@/components/common/ConfirmModal";
 import { useArchiveStore } from "@/store/useArchiveStore";
 import { useNavigation } from "@react-navigation/native";
 import { SCREEN } from "@/constants/screen";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@/navigation/Navigation";
-
+import * as Clipboard from "expo-clipboard";
+import { Alert } from "react-native";
 
 type Props = {
   id: string;
@@ -100,6 +101,10 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
       {/* 복사/공유 버튼 그룹 */}
       <View className="flex-row justify-between mb-4">
         <TouchableOpacity
+          onPress={() => {
+            Clipboard.setStringAsync(content);
+            Alert.alert("복사 완료", "내용이 클립보드에 복사되었어요!");
+          }}
           className="w-[48%] flex-row justify-center items-center px-10 py-3 rounded-[8px] bg-white border"
           style={{ borderColor: "#D3D8E1", borderWidth: 1.2 }}
         >
@@ -117,6 +122,15 @@ const ArchiveDetailCard = ({ date, content, title }: Props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={async () => {
+            try {
+              await Share.share({
+                message: `${title}\n\n${content}`,
+              });
+            } catch (error) {
+              console.error("공유 실패:", error);
+            }
+          }}
           className="w-[48%] flex-row justify-center items-center px-10 py-3 rounded-[8px] bg-white border"
           style={{ borderColor: "#D3D8E1", borderWidth: 1.2 }}
         >

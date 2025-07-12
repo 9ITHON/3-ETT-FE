@@ -93,14 +93,14 @@ const UserSetting = ({ isLoggedIn, onClose }: UserSettingProps) => {
                   color: "#333333",
                 }}
               >
-                쉬우니{" "}
+                쉬우니
                 <Text
                   style={{
                     fontFamily: "NanumSquareRoundOTF",
                     fontSize: 18,
                   }}
                 >
-                  님
+                  {" "}님
                 </Text>
               </Text>
             </View>
